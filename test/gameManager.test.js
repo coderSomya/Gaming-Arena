@@ -3,6 +3,7 @@ import Player from '../src/player.js';
 import GameManager from '../src/gameManager.js';
 
 describe('GameManager', () => {
+    
   it('should initialize with no waiting player and no active games', () => {
     const gameManager = new GameManager();
     expect(gameManager.waitingPlayer).to.equal(null);
