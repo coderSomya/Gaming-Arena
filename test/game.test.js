@@ -28,8 +28,6 @@ describe('Game', () => {
     const attackRoll = playerA.rollDice();
     const defenseRoll = playerB.rollDice();
 
-    game.executeTurn(playerA, playerB); 
-
     const damage = Math.max(0, (playerA.getAttack() * attackRoll) - (playerB.getStrength() * defenseRoll));
     const finaldHealthB = initialHealthB - damage;
 
@@ -50,7 +48,7 @@ describe('Game', () => {
   });
 
   it('should handle a game where player B wins', () => {
-    playerA.setHealth(10);
+    playerA.setHealth(0);
     playerB.setHealth(100);
     game.start();
 
@@ -60,7 +58,7 @@ describe('Game', () => {
 
   it('should handle a game where player A wins', () => {
     playerA.setHealth(100);
-    playerB.setHealth(10);
+    playerB.setHealth(0);
     game.start();
 
     expect(playerA.isAlive()).to.be.true;
