@@ -11,7 +11,6 @@ class Game {
     }
   
     start() {
-      console.log("game started with id ", this.id);
       logToFile(this.logFile, START_GAME_MESSAGE_PREFIX+this.id);
       logToFile(this.logFile, `Player A: ${this.playerA.getHealth()} health`);
       logToFile(this.logFile, `Player B: ${this.playerB.getHealth()} health`);
@@ -23,7 +22,6 @@ class Game {
 
       const winner = this.playerA.isAlive() ? this.playerA.getName() : this.playerB.getName();
       logToFile(this.logFile, END_GAME_MESSAGE_PREFIX + winner);
-      console.log("game ended..winner: ",winner);
     }
 
     gameLoop(attacker, defender){
