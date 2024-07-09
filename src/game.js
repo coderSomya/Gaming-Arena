@@ -13,20 +13,26 @@ class Game {
     start() {
       console.log("game started with id ", this.id);
       logToFile(this.logFile, START_GAME_MESSAGE_PREFIX+this.id);
+      logToFile(this.logFile, `Player A: ${this.playerA.getHealth()} health`);
+      logToFile(this.logFile, `Player B: ${this.playerB.getHealth()} health`);
 
       let attacker = this.playerA.getHealth() <= this.playerB.getHealth() ? this.playerA : this.playerB;
       let defender = attacker === this.playerA ? this.playerB : this.playerA;
-  
+
+      this.gameLoop(attacker, defender);
+
+      const winner = this.playerA.isAlive() ? this.playerA.getName() : this.playerB.getName();
+      logToFile(this.logFile, END_GAME_MESSAGE_PREFIX + winner);
+      console.log("game ended..winner: ",winner);
+    }
+
+    gameLoop(attacker, defender){
       while (this.playerA.isAlive() && this.playerB.isAlive()) {
         this.executeTurn(attacker, defender);
   
         // Swap attacker and defender
         [attacker, defender] = [defender, attacker];
       }
-
-      const winner = this.playerA.isAlive() ? this.playerA.getName() : this.playerB.getName();
-      logToFile(this.logFile, END_GAME_MESSAGE_PREFIX + winner);
-      console.log("game ended..winner: ",winner);
     }
   
     executeTurn(attacker, defender) {
