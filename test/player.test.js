@@ -3,7 +3,7 @@ import Player from '../src/player.js';
 
 
 describe('Player', () => {
-  it('player should have consistent attributes', () => {
+  it('should have consistent attributes', () => {
     const player = new Player('test', 5, 50, 10);
     expect(player.getName()).to.equal('test');
     expect(player.getHealth()).to.equal(5);
