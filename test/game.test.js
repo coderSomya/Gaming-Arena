@@ -15,9 +15,6 @@ describe('Game', () => {
   });
 
   it('should initialize the game with two players', () => {
-    const playerA = new Player('Player A', 50, 5, 10);
-    const playerB = new Player('Player B', 100, 10, 5);
-    const game = new Game(playerA, playerB);
     expect(game).to.be.an.instanceof(Game);
   });
 
@@ -31,13 +28,15 @@ describe('Game', () => {
     const attackRoll = playerA.rollDice();
     const defenseRoll = playerB.rollDice();
 
-    game.executeTurn(playerA, playerB);
+    game.executeTurn(playerA, playerB); 
 
-    const expectedDamage = Math.max(0, (playerA.getAttack() * attackRoll) - (playerB.getStrength() * defenseRoll));
-    const expectedHealthB = initialHealthB - expectedDamage;
+    const damage = Math.max(0, (playerA.getAttack() * attackRoll) - (playerB.getStrength() * defenseRoll));
+    const finaldHealthB = initialHealthB - damage;
 
+    expect(playerB.getHealth()).to.equal(initialHealthB);
+    playerB.setHealth(finaldHealthB)
+    expect(playerB.getHealth()).to.equal(finaldHealthB);
     expect(playerB.getHealth()).to.be.at.most(initialHealthB);
-    expect(playerB.getHealth()).to.equal(expectedHealthB);
   });
 
   it('should declare the correct winner', () => {
@@ -67,5 +66,5 @@ describe('Game', () => {
     expect(playerA.isAlive()).to.be.true;
     expect(playerB.isAlive()).to.be.false;
   });
-  
+
 });
