@@ -25,7 +25,11 @@ class Player{
     }
 
     setHealth(health) {
-        this.#health = health;
+        if (health < 0) {
+            this.#health = 0;
+        } else {
+            this.#health = health;
+        }
     }
 
     getAttack() {
