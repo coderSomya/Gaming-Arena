@@ -1,3 +1,4 @@
+import { END_GAME_MESSAGE_PREFIX, START_GAME_MESSAGE_PREFIX } from '../utils/constants.js';
 import { createLogFile, logToFile } from '../utils/logging.js';
 
 class Game {
@@ -11,7 +12,7 @@ class Game {
   
     start() {
       console.log("game started with id ", this.id);
-      logToFile(this.logFile, `Game started between ${this.playerA.getName()} and ${this.playerB.getName()}`);
+      logToFile(this.logFile, START_GAME_MESSAGE_PREFIX+this.id);
 
       let attacker = this.playerA.getHealth() <= this.playerB.getHealth() ? this.playerA : this.playerB;
       let defender = attacker === this.playerA ? this.playerB : this.playerA;
@@ -24,7 +25,7 @@ class Game {
       }
 
       const winner = this.playerA.isAlive() ? this.playerA.getName() : this.playerB.getName();
-      logToFile(this.logFile, `Game Over! Winner: ${winner}`);
+      logToFile(this.logFile, END_GAME_MESSAGE_PREFIX + winner);
       console.log("game ended..winner: ",winner);
     }
   

@@ -1,3 +1,6 @@
+import {MAX_DICE_VALUE, DEFAULT_PLAYER_NAME, DEFAULT_PLAYER_HEALTH, DEFAULT_PLAYER_ATTACK, DEFAULT_PLAYER_STRENGTH, PLAYER_MIN_HEALTH} from "../utils/constants.js";
+
+
 class Player{
 
     #name;
@@ -5,9 +8,9 @@ class Player{
     #strength;
     #attack;
 
-    //setting attributes as private, for encapusulation
+    //setting attributes as private, for encapsulation
 
-    constructor(name="player", health=0, attack=0, strength=0){
+    constructor(name=DEFAULT_PLAYER_NAME, health=DEFAULT_PLAYER_HEALTH, attack=DEFAULT_PLAYER_ATTACK, strength=DEFAULT_PLAYER_STRENGTH){
         //initialize attributes
         this.#name = name;
         this.#health = health;
@@ -25,8 +28,8 @@ class Player{
     }
 
     setHealth(health) {
-        if (health < 0) {
-            this.#health = 0;
+        if (health < PLAYER_MIN_HEALTH) {
+            this.#health = PLAYER_MIN_HEALTH;
         } else {
             this.#health = health;
         }
@@ -45,7 +48,7 @@ class Player{
     }
     
     rollDice() {
-        return Math.floor(Math.random() * 6) + 1;
+        return Math.floor(Math.random() * MAX_DICE_VALUE) + 1;
     }
 }
 
